@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spendee &#8212; Spendee 0.9.9 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="spendee" href="docstring/modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="spendee">
+<h1>Spendee<a class="headerlink" href="#spendee" title="Permalink to this headline">¶</a></h1>
+<p>This is a package for interfacing with a wonderful <a class="reference external" href="https://www.spendee.com/">Spendee app</a>.</p>
+</div>
+<div class="section" id="warning">
+<h1>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h1>
+<p>No guarantees are provided here. If you wanna use it, go for it, but do know that the original API is undocumented and while it works at the time of writing, it might stop at any time. I’m not associated with Spendee in any way.</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li><p>Be Python 3.7+ ready</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">spendee</span></code></p></li>
+<li><p>Enjoy.</p></li>
+</ol>
+<div class="section" id="endpoints">
+<h2>Endpoints<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h2>
+<p>This is a list of all endpoints I’ve discovered. So far only a subset is implemented:</p>
+<ul class="simple">
+<li><p>[ ] v1/exchange-rate</p></li>
+<li><p>[ ] v1.3/currencies</p></li>
+<li><p>[X] v1.6/user-currencies</p></li>
+<li><p>[X] v2/countries</p></li>
+<li><p>[ ] v1/notification-count-unread</p></li>
+<li><p>[ ] v1/notification-get-all</p></li>
+<li><p>[ ] v1/notification-set</p></li>
+<li><p>[ ] v1.5/user-fb-connect</p></li>
+<li><p>[ ] v1.5/user-google-connect</p></li>
+<li><p>[X] v1.5/user-registration</p></li>
+<li><p>[X] v1.5/user-update-profile</p></li>
+<li><p>[ ] v1/user-check-email</p></li>
+<li><p>[ ] v1/user-set-subscription</p></li>
+<li><p>[ ] v1.4/user-forgot-password</p></li>
+<li><p>[X] v1.4/user-get-profile</p></li>
+<li><p>[ ] v1.4/user-get-profiles</p></li>
+<li><p>[X] v1.4/user-login</p></li>
+<li><p>[X] v1.4/user-logout</p></li>
+<li><p>[ ] v1.4/user-password-change-confirmation</p></li>
+<li><p>[ ] v1.4/request-deletion</p></li>
+<li><p>[ ] v1.4/request-email-change</p></li>
+<li><p>[ ] v1.4/confirm-deletion</p></li>
+<li><p>[ ] v1.4/confirm-email-change</p></li>
+<li><p>[ ] v1/wallet-accept-sharing</p></li>
+<li><p>[X] v1/wallet-create</p></li>
+<li><p>[X] v1/wallet-delete</p></li>
+<li><p>[X] v1/wallet-delete-category</p></li>
+<li><p>[ ] v1/wallet-get</p></li>
+<li><p>[X] v1/wallet-get-all</p></li>
+<li><p>[ ] v1/wallet-get-category</p></li>
+<li><p>[ ] v1/wallet-get-users</p></li>
+<li><p>[X] v1/wallet-invite-to-share</p></li>
+<li><p>[ ] v1/wallet-order-categories</p></li>
+<li><p>[X] v1/wallet-unshare-user</p></li>
+<li><p>[X] v1/wallet-update</p></li>
+<li><p>[X] v1.3/banks-get-all</p></li>
+<li><p>[ ] v1.3/delete-bank-login</p></li>
+<li><p>[X] v1.3/category-image-ids</p></li>
+<li><p>[ ] v1.4/merge-categories</p></li>
+<li><p>[ ] v1.4/recommendation-likelihood</p></li>
+<li><p>[X] v1.4/wallet-create-category</p></li>
+<li><p>[ ] v1.4/wallet-get-categories</p></li>
+<li><p>[X] v1.4/wallet-update-category</p></li>
+<li><p>[ ] v1.5/change-to-two-way-transfer</p></li>
+<li><p>[ ] v1.5/delete-transfer-transaction</p></li>
+<li><p>[ ] v1.5/link-two-transactions-into-transfer</p></li>
+<li><p>[ ] v1.5/revert-transfer-to-regular-transaction</p></li>
+<li><p>[ ] v1.5/transaction-suggestions</p></li>
+<li><p>[ ] v1.5/transfer-funds</p></li>
+<li><p>[ ] v1.5/update-transfer</p></li>
+<li><p>[ ] v1.5/viewed-dialogs</p></li>
+<li><p>[ ] v1.5/wallet-create-transaction</p></li>
+<li><p>[ ] v1.5/wallet-delete-transaction</p></li>
+<li><p>[ ] v1.5/wallet-update-transaction</p></li>
+<li><p>[X] v1.6/get-all-user-categories</p></li>
+<li><p>[ ] v1.6/get-transactions</p></li>
+<li><p>[ ] v1.6/iframe-wallet-data?id=</p></li>
+<li><p>[ ] v1.6/reorder-wallets</p></li>
+<li><p>[X] v1.7/create-budget</p></li>
+<li><p>[ ] v1.7/delete-budget</p></li>
+<li><p>[ ] v1.7/edit-budget</p></li>
+<li><p>[X] v1.7/get-budgets</p></li>
+<li><p>[ ] v1.7/reorder-budgets</p></li>
+<li><p>[ ] v1.8/create-transaction-template</p></li>
+<li><p>[ ] v1.8/delete-transaction-template</p></li>
+<li><p>[X] v1.8/get-transaction-templates</p></li>
+<li><p>[ ] v1.6/wallet-get-transaction</p></li>
+<li><p>[X] v1.8/wallet-get-transactions</p></li>
+<li><p>[ ] v2/destroyCredentials</p></li>
+<li><p>[ ] v2/providers?country=</p></li>
+<li><p>[ ] v2/url?clientVersion=</p></li>
+<li><p>[ ] v2/visible</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-spendee.spendee">
+<span id="methods"></span><h1>Methods<a class="headerlink" href="#module-spendee.spendee" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.request" title="spendee.spendee.Spendee.request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request</span></code></a>(method, url[, version, headers])</p></td>
+<td><p>Adds additional functionality over super’s request method: 1.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.user_registration" title="spendee.spendee.Spendee.user_registration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_registration</span></code></a>([email, password, …])</p></td>
+<td><p>Sign up a new user</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.user_login" title="spendee.spendee.Spendee.user_login"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_login</span></code></a>([device_uuid])</p></td>
+<td><p>Method to authenticate the user</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.user_logout" title="spendee.spendee.Spendee.user_logout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_logout</span></code></a>([version, url])</p></td>
+<td><p>Logout the user</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.user_get_profile" title="spendee.spendee.Spendee.user_get_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_get_profile</span></code></a>([version, url])</p></td>
+<td><p>Retrieve the user profile</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.user_update_profile" title="spendee.spendee.Spendee.user_update_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_update_profile</span></code></a>(firstname, lastname, …)</p></td>
+<td><p>Update the user profile</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.user_currencies" title="spendee.spendee.Spendee.user_currencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_currencies</span></code></a>([version, url])</p></td>
+<td><p>Retrieve all the currencies available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.get_all_user_categories" title="spendee.spendee.Spendee.get_all_user_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_user_categories</span></code></a>([version, url])</p></td>
+<td><p>Returns a list of all user defined categories</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.banks_get_all" title="spendee.spendee.Spendee.banks_get_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">banks_get_all</span></code></a>([version, url])</p></td>
+<td><p>Returns a list of all connected bank accounts</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.bank_login_detail" title="spendee.spendee.Spendee.bank_login_detail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bank_login_detail</span></code></a>(login_id[, includeBank, …])</p></td>
+<td><p>Get details of a bank account</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_get_all" title="spendee.spendee.Spendee.wallet_get_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_get_all</span></code></a>([version, url])</p></td>
+<td><p>Returns a list of all user’s wallets</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_get_transactions" title="spendee.spendee.Spendee.wallet_get_transactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_get_transactions</span></code></a>([offset, limit, …])</p></td>
+<td><p>Retrieve all the transactions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_create" title="spendee.spendee.Spendee.wallet_create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_create</span></code></a>(name, currency[, order, …])</p></td>
+<td><p>Create a wallet</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_update" title="spendee.spendee.Spendee.wallet_update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_update</span></code></a>(id, name, currency[, …])</p></td>
+<td><p>Update the wallet settings</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_delete" title="spendee.spendee.Spendee.wallet_delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_delete</span></code></a>(wallet_id[, version, url])</p></td>
+<td><p>Delete a wallet</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_invite_to_share" title="spendee.spendee.Spendee.wallet_invite_to_share"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_invite_to_share</span></code></a>(wallet_id, emails[, …])</p></td>
+<td><p>Invite to share a wallet with another user</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_unshare_user" title="spendee.spendee.Spendee.wallet_unshare_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_unshare_user</span></code></a>(wallet_id, emails[, …])</p></td>
+<td><p>Delete an invite to a wallet</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_create_category" title="spendee.spendee.Spendee.wallet_create_category"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_create_category</span></code></a>(name[, wallet_id, …])</p></td>
+<td><p>Create a category</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_delete_category" title="spendee.spendee.Spendee.wallet_delete_category"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_delete_category</span></code></a>(category_id[, …])</p></td>
+<td><p>Delete a category</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.wallet_update_category" title="spendee.spendee.Spendee.wallet_update_category"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wallet_update_category</span></code></a>(id, wallet_id, name)</p></td>
+<td><p>Update category</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.get_budgets" title="spendee.spendee.Spendee.get_budgets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_budgets</span></code></a>([version, url])</p></td>
+<td><p>Retrieves a list of user’s budgets</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.create_budget" title="spendee.spendee.Spendee.create_budget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_budget</span></code></a>(name, limit, currency, …[, …])</p></td>
+<td><p>Create a budget</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.category_image_ids" title="spendee.spendee.Spendee.category_image_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">category_image_ids</span></code></a>([version, url])</p></td>
+<td><p>Retrieves a list of all IDs of category icons</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.countries" title="spendee.spendee.Spendee.countries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">countries</span></code></a>([version, url])</p></td>
+<td><p>Retrieves a list of all available countries</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="docstring/spendee.html#spendee.spendee.Spendee.get_transaction_templates" title="spendee.spendee.Spendee.get_transaction_templates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transaction_templates</span></code></a>([version, url])</p></td>
+<td><p>Retrieves a list of scheduled/repeating transactions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docstring/modules.html">spendee</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docstring/spendee.html">API reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Spendee</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docstring/modules.html">spendee</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="docstring/modules.html" title="next chapter">spendee</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Dionyz Lazar.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

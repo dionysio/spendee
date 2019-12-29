@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>API reference &#8212; Spendee 0.9.9 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="spendee" href="modules.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-spendee.spendee">
+<span id="api-reference"></span><h1>API reference<a class="headerlink" href="#module-spendee.spendee" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="spendee.spendee.Spendee">
+<em class="property">class </em><code class="sig-prename descclassname">spendee.spendee.</code><code class="sig-name descname">Spendee</code><span class="sig-paren">(</span><em class="sig-param">email</em>, <em class="sig-param">password</em>, <em class="sig-param">base_url='https://api.spendee.com/'</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="spendee.spendee.Spendee.bank_login_detail">
+<code class="sig-name descname">bank_login_detail</code><span class="sig-paren">(</span><em class="sig-param">login_id</em>, <em class="sig-param">includeBank=True</em>, <em class="sig-param">version='v2'</em>, <em class="sig-param">url='bankLogins/detail'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.bank_login_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get details of a bank account</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>login_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>includeBank</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;provider&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ČSOB&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api2.spendee.com/media/cache/provider_logo_original/csob_cz.png&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;accounts&quot;</span><span class="p">:[</span>
+      <span class="p">{</span>
+          <span class="nt">&quot;walletId&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+          <span class="nt">&quot;nature&quot;</span><span class="p">:</span> <span class="s2">&quot;account&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+          <span class="nt">&quot;accountNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;XXXXXXX&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Account&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;balance&quot;</span><span class="p">:</span> <span class="mf">6.9299999999998</span><span class="p">,</span>
+          <span class="nt">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;CZK&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;active&quot;</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.banks_get_all">
+<code class="sig-name descname">banks_get_all</code><span class="sig-paren">(</span><em class="sig-param">version='v1.3'</em>, <em class="sig-param">url='banks-get-all'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.banks_get_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all connected bank accounts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+        <span class="nt">&quot;provider_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ČSOB&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;provider_code&quot;</span><span class="p">:</span> <span class="s2">&quot;csob_cz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;provider_image&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api2.spendee.com/media/cache/provider_logo/salt-edge/csob_cz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;remember_credentials&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;last_fetch&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 18:10:37&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh_possible&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;country_code&quot;</span><span class="p">:</span> <span class="s2">&quot;CZ&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 19:10:34&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;consent_expiration_date&quot;</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.category_image_ids">
+<code class="sig-name descname">category_image_ids</code><span class="sig-paren">(</span><em class="sig-param">version='v1.3'</em>, <em class="sig-param">url='category-image-ids'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.category_image_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of all IDs of category icons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.countries">
+<code class="sig-name descname">countries</code><span class="sig-paren">(</span><em class="sig-param">version='v2'</em>, <em class="sig-param">url='countries'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.countries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of all available countries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;ZM&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Zambia&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.create_budget">
+<code class="sig-name descname">create_budget</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">limit</em>, <em class="sig-param">currency</em>, <em class="sig-param">wallets</em>, <em class="sig-param">categories</em>, <em class="sig-param">users</em>, <em class="sig-param">position=1</em>, <em class="sig-param">start_date=None</em>, <em class="sig-param">end_date=None</em>, <em class="sig-param">status='active'</em>, <em class="sig-param">all_categories_selected=True</em>, <em class="sig-param">all_users_selected=True</em>, <em class="sig-param">all_wallets_selected=True</em>, <em class="sig-param">period='monthly'</em>, <em class="sig-param">offline=False</em>, <em class="sig-param">notification=True</em>, <em class="sig-param">version='v1.7'</em>, <em class="sig-param">url='create-budget'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.create_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a budget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the budget</p></li>
+<li><p><strong>limit</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the budget amount</p></li>
+<li><p><strong>currency</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – amount’s currency</p></li>
+<li><p><strong>wallets</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of wallets this budget is relevant to</p></li>
+<li><p><strong>categories</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of categories this budget is relevant to</p></li>
+<li><p><strong>users</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of users this budget is shared with</p></li>
+<li><p><strong>position</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – order position of the budget among all the budgets</p></li>
+<li><p><strong>start_date</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code>]) – when</p></li>
+<li><p><strong>end_date</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code>]) – when is the end of the budget. Only relevant when period=’once’</p></li>
+<li><p><strong>status</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – active</p></li>
+<li><p><strong>period</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – once/daily/weekly/biweekly/monthly/yearly</p></li>
+<li><p><strong>offline</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether it was created offline</p></li>
+<li><p><strong>notification</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to enable notifications for this budget</p></li>
+<li><p><strong>all_categories_selected</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether all categories were selected or only a subset of them</p></li>
+<li><p><strong>all_wallets_selected</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether all wallets were selected or only a subset of them</p></li>
+<li><p><strong>all_users_selected</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether all users were selected or only a subset of them</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">9999999</span><span class="p">,</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;1485fbde-9999-9999-b719-cde2de40a91a&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Big Trip&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;notification&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;start_date&quot;</span><span class="p">:</span><span class="s2">&quot;2019-12-01&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;end_date&quot;</span><span class="p">:</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="s2">&quot;once&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;all_categories_selected&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;all_users_selected&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;all_wallets_selected&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:[</span><span class="mi">999999</span><span class="p">],</span>
+    <span class="nt">&quot;users&quot;</span><span class="p">:[</span><span class="mi">99999</span><span class="p">],</span>
+    <span class="nt">&quot;wallets&quot;</span><span class="p">:[</span><span class="mi">999999</span><span class="p">]</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.get_all_user_categories">
+<code class="sig-name descname">get_all_user_categories</code><span class="sig-paren">(</span><em class="sig-param">version='v1.6'</em>, <em class="sig-param">url='get-all-user-categories'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.get_all_user_categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all user defined categories</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Flights&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;wallet_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;image_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;expense&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#F963A0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-28 14:40:09.106943&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 18:10:38.000000&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+    <span class="nt">&quot;word_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;deletable&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;wallets_settings&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;wallet_id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+            <span class="nt">&quot;category_id&quot;</span><span class="p">:</span> <span class="mi">34958019</span><span class="p">,</span>
+            <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nt">&quot;visible&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;transactions_stats&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;affected_wallets_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;total_count&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="nt">&quot;any_belongs_to_bank&quot;</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.get_budgets">
+<code class="sig-name descname">get_budgets</code><span class="sig-paren">(</span><em class="sig-param">version='v1.7'</em>, <em class="sig-param">url='get-budgets'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.get_budgets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of user’s budgets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">999999</span><span class="p">,</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;bcee8565-9999-9999-81a7-d26d57ff9675&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Long Trip&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;notification&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;start_date&quot;</span><span class="p">:</span><span class="s2">&quot;2019-12-01&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;end_date&quot;</span><span class="p">:</span><span class="s2">&quot;2019-12-31&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="s2">&quot;once&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;all_categories_selected&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;all_users_selected&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;all_wallets_selected&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:[],</span>
+    <span class="nt">&quot;users&quot;</span><span class="p">:[],</span>
+    <span class="nt">&quot;wallets&quot;</span><span class="p">:[]</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.get_transaction_templates">
+<code class="sig-name descname">get_transaction_templates</code><span class="sig-paren">(</span><em class="sig-param">version='v1.8'</em>, <em class="sig-param">url='get-transaction-templates'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.get_transaction_templates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of scheduled/repeating transactions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.request">
+<code class="sig-name descname">request</code><span class="sig-paren">(</span><em class="sig-param">method</em>, <em class="sig-param">url</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds additional functionality over super’s request method:
+1. adds api-uuid header automatically for user-only methods
+2. adds error checking</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> – HTTP method to use</p></li>
+<li><p><strong>url</strong> – endpoint to call</p></li>
+<li><p><strong>version</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – API version to use. At the time of writing this, there were v1, v1.3, v1.4, v1.5, v1.6, v1.7, v1.8, v2</p></li>
+<li><p><strong>headers</strong> – optional HTTP headers to use</p></li>
+<li><p><strong>kwargs</strong> – additional arguments passed down to requests</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;result&quot;</span><span class="p">:{</span>
+
+   <span class="p">},</span>
+   <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;v1.4&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;api.user-login&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-29 07:30:01.163292&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;addc3a80c74aa7268d14bee0209cc72a&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.user_currencies">
+<code class="sig-name descname">user_currencies</code><span class="sig-paren">(</span><em class="sig-param">version='v1.6'</em>, <em class="sig-param">url='user-currencies'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.user_currencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all the currencies available</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;recent&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Euro&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;decimal_digits&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nt">&quot;usd_exchange_rate&quot;</span><span class="p">:</span> <span class="s2">&quot;1.117469512638000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;replaced_by&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;all&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;currencies&quot;</span><span class="p">:</span> <span class="p">[{</span>
+          <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Euro&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;decimal_digits&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&quot;usd_exchange_rate&quot;</span><span class="p">:</span> <span class="s2">&quot;1.117469512638000&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;replaced_by&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nt">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="kc">null</span>
+      <span class="p">}]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.user_get_profile">
+<code class="sig-name descname">user_get_profile</code><span class="sig-paren">(</span><em class="sig-param">version='v1.4'</em>, <em class="sig-param">url='user-get-profile'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.user_get_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the user profile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;b9b6ecb3-9999-9999-bf15-03fb802f4628&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;fry@planetexpress.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;firstname&quot;</span><span class="p">:</span> <span class="s2">&quot;Phillip J.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastname&quot;</span><span class="p">:</span> <span class="s2">&quot;Fry&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nickname&quot;</span><span class="p">:</span> <span class="s2">&quot;Fry&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;male&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;gp_uid&quot;</span><span class="p">:</span> <span class="mi">107416106303948470000</span><span class="p">,</span>
+    <span class="nt">&quot;fb_uid&quot;</span><span class="p">:</span> <span class="mi">107416104303448470000</span><span class="p">,</span>
+    <span class="nt">&quot;photo&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.spendee.com/files/b/3/916307877cb8e1af749c70ed16271705&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;cohort_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 18:03:59&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories_version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nt">&quot;referral_code&quot;</span><span class="p">:</span> <span class="s2">&quot;53t71r&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;premium&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;unconfirmed_email&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;timezone_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;birth_date&quot;</span><span class="p">:</span> <span class="s2">&quot;1974-08-14&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;past_type&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;premium_expiration&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;conditions_accepted&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;global_currency&quot;</span><span class="p">:</span> <span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;agreement_general_tos&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-24 22:54:56&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;agreement_marketing&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-24 22:54:57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;viewed_tos_agreement_dialog&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&quot;last_recommendation_likelihood_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-16&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;viewed_dialogs&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;black_friday_intro_2019&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;transfers_how_it_works&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;transfers_feature_introduction&quot;</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;has_already_tried_out_trial&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&quot;count_referred_users&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;is_registered_via_referral_code&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;introductory_offer_available&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;geo&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;continent&quot;</span><span class="p">:</span> <span class="s2">&quot;North America&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;New New York&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;New New York&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;subscription_period&quot;</span><span class="p">:</span> <span class="s2">&quot;MONTH&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;product_id&quot;</span><span class="p">:</span> <span class="s2">&quot;spendee.premium_banks.month_test4&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;push_allowed&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.user_login">
+<code class="sig-name descname">user_login</code><span class="sig-paren">(</span><em class="sig-param">device_uuid=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.user_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to authenticate the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>device_uuid</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – random string with 36 characters. Generates uuid4 by default</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the same as underlying self._user_login method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.user_logout">
+<code class="sig-name descname">user_logout</code><span class="sig-paren">(</span><em class="sig-param">version='v1.4'</em>, <em class="sig-param">url='user-logout'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.user_logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns True if logout was successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.user_registration">
+<code class="sig-name descname">user_registration</code><span class="sig-paren">(</span><em class="sig-param">email=None</em>, <em class="sig-param">password=None</em>, <em class="sig-param">device_uuid=None</em>, <em class="sig-param">categories_version=2</em>, <em class="sig-param">with_categories=True</em>, <em class="sig-param">version='v1.5'</em>, <em class="sig-param">url='user-registration'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.user_registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sign up a new user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>email</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – user email</p></li>
+<li><p><strong>password</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – user password</p></li>
+<li><p><strong>device_uuid</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – random string with 36 characters, by default generates uuid4 hash</p></li>
+<li><p><strong>categories_version</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – honestly not sure what this even does. 2 by default</p></li>
+<li><p><strong>with_categories</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – same ^, enabled by default</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">9999999</span><span class="p">,</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;04fe4a6b-9999-9999-acac-fd2cbd660fb9&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;fry@planetexpress.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;firstname&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;lastname&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nickname&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;timezone_id&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;birth_date&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;gp_uid&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;fb_uid&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;photo&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;cohort_date&quot;</span><span class="p">:</span><span class="s2">&quot;2019-12-29 15:16:34&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories_version&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+    <span class="nt">&quot;referral_code&quot;</span><span class="p">:</span><span class="s2">&quot;44947b&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;push_allowed&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;past_type&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;free&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;unconfirmed_email&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;premium_expiration&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;conditions_accepted&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;global_currency&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;last_recommendation_likelihood_date&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;agreement_general_tos&quot;</span><span class="p">:</span><span class="s2">&quot;2019-12-29 15:16:34&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;agreement_marketing&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;viewed_tos_agreement_dialog&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&quot;viewed_dialogs&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;transfers_feature_introduction&quot;</span><span class="p">:</span><span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;has_already_tried_out_trial&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;count_referred_users&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;is_registered_via_referral_code&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;api_uuid&quot;</span><span class="p">:</span><span class="s2">&quot;bbbf1c6f-9999-9999-86cd-89ec2632e8d5&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;premium_operator&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;user_referrer_name&quot;</span><span class="p">:</span><span class="kc">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.user_update_profile">
+<code class="sig-name descname">user_update_profile</code><span class="sig-paren">(</span><em class="sig-param">firstname</em>, <em class="sig-param">lastname</em>, <em class="sig-param">email</em>, <em class="sig-param">gender</em>, <em class="sig-param">birth_date</em>, <em class="sig-param">currency</em>, <em class="sig-param">photo</em>, <em class="sig-param">language_label</em>, <em class="sig-param">language_value</em>, <em class="sig-param">id</em>, <em class="sig-param">version='v1.5'</em>, <em class="sig-param">url='user-update-profile'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.user_update_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the user profile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>firstname</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – first name</p></li>
+<li><p><strong>lastname</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – last name</p></li>
+<li><p><strong>email</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – email address</p></li>
+<li><p><strong>email</strong> – email address</p></li>
+<li><p><strong>gender</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – male/female</p></li>
+<li><p><strong>birth_date</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code>) – birth date</p></li>
+<li><p><strong>currency</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – EUR/USD…</p></li>
+<li><p><strong>photo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – URL of the image</p></li>
+<li><p><strong>language_label</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – English/…</p></li>
+<li><p><strong>language_value</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – en-US…</p></li>
+<li><p><strong>id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – user profile ID to update</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;photo&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.spendee.com/files/b/3/916307877cb8e1af749c70ed16271705&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_create">
+<code class="sig-name descname">wallet_create</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">currency</em>, <em class="sig-param">order=1</em>, <em class="sig-param">starting_balance=0.0</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-create'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a wallet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – wallet name</p></li>
+<li><p><strong>currency</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – currency to use</p></li>
+<li><p><strong>order</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – wallet order position</p></li>
+<li><p><strong>starting_balance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – amount to start the wallet with</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;2ac71d51-9999-9999-9abb-da4476fc1b6c&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Wallet Name&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;balance&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-29 08:09:24.150933&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-29 08:09:24.150933&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;starting_balance&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;users_changed&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;is_free&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;last_opened&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;bank&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:[],</span>
+    <span class="nt">&quot;transactions&quot;</span><span class="p">:[],</span>
+    <span class="nt">&quot;sharing_users&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+            <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;b9b6ecb3-9999-9999-bf15-03fb802f4628&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;fry@planetexpress.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;firstname&quot;</span><span class="p">:</span> <span class="s2">&quot;Phillip J.&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;lastname&quot;</span><span class="p">:</span> <span class="s2">&quot;Fry&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;nickname&quot;</span><span class="p">:</span> <span class="s2">&quot;Fry&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;timezone_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Europe/Prague&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;male&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;birth_date&quot;</span><span class="p">:</span> <span class="s2">&quot;1974-08-14&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;gp_uid&quot;</span><span class="p">:</span> <span class="mi">10741999930344847000</span><span class="p">,</span>
+            <span class="nt">&quot;fb_uid&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nt">&quot;photo&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.spendee.com//files/b/3/916307877cb8e1af749c70ed16271705&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;cohort_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 18:03:59&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;categories_version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nt">&quot;referral_code&quot;</span><span class="p">:</span> <span class="s2">&quot;53t71r&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;is_owner&quot;</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;pending_users&quot;</span><span class="p">:[],</span>
+    <span class="nt">&quot;invitation_emails&quot;</span><span class="p">:[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_create_category">
+<code class="sig-name descname">wallet_create_category</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">wallet_id=None</em>, <em class="sig-param">image_id=1</em>, <em class="sig-param">visible=True</em>, <em class="sig-param">position=1</em>, <em class="sig-param">color='#f5534b'</em>, <em class="sig-param">status='active'</em>, <em class="sig-param">type='expense'</em>, <em class="sig-param">version='v1.4'</em>, <em class="sig-param">url='wallet-create-category'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_create_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a category</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the category</p></li>
+<li><p><strong>wallet_id</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Wallet this category is associated with</p></li>
+<li><p><strong>image_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image ID to use as an icon. You can retrieve the IDs from category_image_ids</p></li>
+<li><p><strong>visible</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether it’s visible. Enabled by default</p></li>
+<li><p><strong>position</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – position of its order among other categories</p></li>
+<li><p><strong>color</strong> – hex string of the color for the icon</p></li>
+<li><p><strong>status</strong> – active</p></li>
+<li><p><strong>type</strong> – expense/income</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>category_id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_delete">
+<code class="sig-name descname">wallet_delete</code><span class="sig-paren">(</span><em class="sig-param">wallet_id</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-delete'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a wallet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wallet_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – ID of the wallet to delete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns True if wallet was deleted successfully</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_delete_category">
+<code class="sig-name descname">wallet_delete_category</code><span class="sig-paren">(</span><em class="sig-param">category_id</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-delete-category'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_delete_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a category</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>category_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – ID of the category to delete</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_get_all">
+<code class="sig-name descname">wallet_get_all</code><span class="sig-paren">(</span><em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-get-all'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_get_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all user’s wallets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+        <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;a197c99a-9999-9999-a027-0fb9509d5bbc&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Wallet&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;balance&quot;</span><span class="p">:</span> <span class="mf">4.5000353099999</span><span class="p">,</span>
+        <span class="nt">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-28 15:12:08.905164&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 18:04:41.387892&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;starting_balance&quot;</span><span class="p">:</span> <span class="mf">8.59</span><span class="p">,</span>
+        <span class="nt">&quot;users_changed&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-28 15:19:14.626365&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;is_free&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;last_opened&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-12-27 05:42:23&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;bank&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;sharing_users&quot;</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+                <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;b9b6ecb3-9999-9999-bf15-03fb802f4628&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;fry@planetexpress.com&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;firstname&quot;</span><span class="p">:</span> <span class="s2">&quot;Phillip J.&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;lastname&quot;</span><span class="p">:</span> <span class="s2">&quot;Fry&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;nickname&quot;</span><span class="p">:</span> <span class="s2">&quot;Fry&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;timezone_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Europe/Prague&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;male&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;birth_date&quot;</span><span class="p">:</span> <span class="s2">&quot;1974-08-14&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;gp_uid&quot;</span><span class="p">:</span> <span class="mi">107416104303448470000</span><span class="p">,</span>
+                <span class="nt">&quot;fb_uid&quot;</span><span class="p">:</span> <span class="mi">107416104303448470000</span><span class="p">,</span>
+                <span class="nt">&quot;photo&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.spendee.com//files/b/3/916307877cb8e1af749c70ed16271705&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;cohort_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-19 18:03:59&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;categories_version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="nt">&quot;referral_code&quot;</span><span class="p">:</span> <span class="s2">&quot;53t71r&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;is_owner&quot;</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;pending_users&quot;</span><span class="p">:[</span>
+
+        <span class="p">],</span>
+        <span class="nt">&quot;invitation_emails&quot;</span><span class="p">:[</span>
+
+        <span class="p">],</span>
+        <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;include_future_transactions&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;visible_in_awo&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;is_visible&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;is_my&quot;</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_get_transactions">
+<code class="sig-name descname">wallet_get_transactions</code><span class="sig-paren">(</span><em class="sig-param">offset=0</em>, <em class="sig-param">limit=10000</em>, <em class="sig-param">version='v1.8'</em>, <em class="sig-param">url='wallet-get-transactions'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_get_transactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all the transactions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – pagination offset</p></li>
+<li><p><strong>limit</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – pagination limit</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">999999999</span><span class="p">,</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;446d7d15-9999-9999-8bf3-05225b9117d3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="mi">999999</span><span class="p">,</span>
+    <span class="nt">&quot;wallet_id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+    <span class="nt">&quot;category_id&quot;</span><span class="p">:</span> <span class="mi">34957616</span><span class="p">,</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">-7.817304</span><span class="p">,</span>
+    <span class="nt">&quot;repeat&quot;</span><span class="p">:</span> <span class="s2">&quot;never&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;reminder&quot;</span><span class="p">:</span> <span class="s2">&quot;never&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-24 14:00:54.348598&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-24 14:00:54.348598&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-11-24 13:59:07&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;offset&quot;</span><span class="p">:</span> <span class="s2">&quot;+09:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;location_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;Angry Norwegian Anchovies&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;note_changed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;template_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;recurring_date&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;rebuild_date&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;foreign_currency&quot;</span><span class="p">:</span> <span class="s2">&quot;JPY&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;foreign_rate&quot;</span><span class="p">:</span> <span class="mf">0.007171838494954</span><span class="p">,</span>
+    <span class="nt">&quot;foreign_amount&quot;</span><span class="p">:</span> <span class="mi">-1090</span><span class="p">,</span>
+    <span class="nt">&quot;is_pending&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;timezone&quot;</span><span class="p">:</span> <span class="s2">&quot;Asia/Tokyo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;linked_transaction_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;REGULAR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;hashtags&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;transfer_type&quot;</span><span class="p">:</span> <span class="kc">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_invite_to_share">
+<code class="sig-name descname">wallet_invite_to_share</code><span class="sig-paren">(</span><em class="sig-param">wallet_id</em>, <em class="sig-param">emails</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-invite-to-share'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_invite_to_share" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invite to share a wallet with another user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wallet_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – ID of the wallet to share</p></li>
+<li><p><strong>emails</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of emails to invite</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns True if invitation has been sent successfully</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_unshare_user">
+<code class="sig-name descname">wallet_unshare_user</code><span class="sig-paren">(</span><em class="sig-param">wallet_id</em>, <em class="sig-param">emails</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-unshare-user'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_unshare_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an invite to a wallet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wallet_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – ID of the wallet to stop sharing</p></li>
+<li><p><strong>emails</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of emails to delete the invites for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns True if an invitation has been deleted successfully</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_update">
+<code class="sig-name descname">wallet_update</code><span class="sig-paren">(</span><em class="sig-param">id</em>, <em class="sig-param">name</em>, <em class="sig-param">currency</em>, <em class="sig-param">starting_balance=0.0</em>, <em class="sig-param">version='v1'</em>, <em class="sig-param">url='wallet-update'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the wallet settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – ID of the wallet to update</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – new name of the wallet</p></li>
+<li><p><strong>currency</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – new currency of the wallet</p></li>
+<li><p><strong>starting_balance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – new starting amount of the wallet</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns True if wallet was updated successfully</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spendee.spendee.Spendee.wallet_update_category">
+<code class="sig-name descname">wallet_update_category</code><span class="sig-paren">(</span><em class="sig-param">id</em>, <em class="sig-param">wallet_id</em>, <em class="sig-param">name</em>, <em class="sig-param">visible=True</em>, <em class="sig-param">color='#f5534b'</em>, <em class="sig-param">position=1</em>, <em class="sig-param">image_id=1</em>, <em class="sig-param">version='v1.4'</em>, <em class="sig-param">url='wallet-update-category'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#spendee.spendee.Spendee.wallet_update_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update category</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the category</p></li>
+<li><p><strong>wallet_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Wallet this category is associated with</p></li>
+<li><p><strong>image_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image ID to use as an icon. You can retrieve the IDs from category_image_ids</p></li>
+<li><p><strong>visible</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether it’s visible. Enabled by default</p></li>
+<li><p><strong>position</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – position of its order among other categories</p></li>
+<li><p><strong>color</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – hex string of the color for the icon</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if category was updated successfully</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Spendee</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">spendee</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">API reference</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">spendee</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">spendee</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Dionyz Lazar.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/docstring/spendee.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

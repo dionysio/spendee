@@ -1,0 +1,6 @@
+spendee.spendee.Spendee.user\_login
+===================================
+
+.. currentmodule:: spendee.spendee
+
+.. automethod:: Spendee.user_login
