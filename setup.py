@@ -12,6 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dionysio/spendee",
+    download_url="https://github.com/dionysio/spendee/archive/v0.9.9.9.tar.gz",
     packages=setuptools.find_packages(),
     install_requires=['requests'],
     classifiers=[
