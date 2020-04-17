@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="spendee-dio",
+    name="spendee-api",
     version="0.9.9",
     author="Dionyz Lazar",
     author_email="dio@dionysio.com",

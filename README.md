@@ -1,6 +1,6 @@
 # Spendee
 
-This is a package for interfacing with a wonderful [Spendee app](https://www.spendee.com/).
+This is a Python API wrapper for interfacing with a wonderful [Spendee app](https://www.spendee.com/).
 
 # Warning
 
@@ -62,15 +62,10 @@ This is a list of all endpoints I've discovered. So far only a subset is impleme
 - [ ] v1.6/iframe-wallet-data?id=
 - [ ] v1.6/reorder-wallets
 - [ ] v1.6/wallet-get-transaction
-- [ ] v1.7/delete-budget
-- [ ] v1.7/edit-budget
 - [ ] v1.7/reorder-budgets
 - [ ] v1.8/create-transaction-template
 - [ ] v1.8/delete-transaction-template
 - [ ] v2/destroyCredentials
-- [ ] v2/providers?country=
-- [ ] v2/url?clientVersion=
-- [ ] v2/visible
 - [X] v1.3/banks-get-all
 - [X] v1.3/category-image-ids
 - [X] v1.4/user-get-profile
@@ -83,6 +78,8 @@ This is a list of all endpoints I've discovered. So far only a subset is impleme
 - [X] v1.6/get-all-user-categories
 - [X] v1.6/user-currencies
 - [X] v1.7/create-budget
+- [X] v1.7/delete-budget
+- [X] v1.7/edit-budget
 - [X] v1.7/get-budgets
 - [X] v1.8/get-transaction-templates
 - [X] v1.8/wallet-get-transactions
@@ -94,3 +91,11 @@ This is a list of all endpoints I've discovered. So far only a subset is impleme
 - [X] v1/wallet-unshare-user
 - [X] v1/wallet-update
 - [X] v2/countries
+- [X] v2/logins/refresh
+- [X] v2/providers
+- [X] v2/url
+- [X] v2/visible
+
+## Contributing
+
+If you can improve anything in this repo, feel free to add a pull request or add an issue!

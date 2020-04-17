@@ -32,7 +32,7 @@ class Spendee(Session):
         """
         return '{}{}/{}'.format(self.base_url, version, url)
 
-    def request(self, method, url, version: str = 'v1', headers=None, **kwargs):
+    def request(self, method, url, version: str = 'v1', headers=None, params=None, **kwargs):
         """
         Adds additional functionality over super's request method:
         1. adds api-uuid header automatically for user-only methods
@@ -58,6 +58,11 @@ class Spendee(Session):
                "checksum": "addc3a80c74aa7268d14bee0209cc72a"
             }
         """
+        if params is None:
+            params = {
+                'clientVersion': 'master',
+                'clientPlatform': 'WEB'
+            }
         if headers is None:
             headers = {}
 
@@ -68,7 +73,7 @@ class Spendee(Session):
 
         response = None
         try:
-            response = super(Spendee, self).request(method=method, url=url, headers=headers, **kwargs)
+            response = super(Spendee, self).request(method=method, url=url, headers=headers, params=params, **kwargs)
             response.raise_for_status()
         except RequestException as e:
             raise SpendeeError("Spendee returned a non-200 HTTP code.", response=response) from e
@@ -818,6 +823,43 @@ class Spendee(Session):
         """
         return self.get(url=url, version=version, **kwargs)
 
+    @staticmethod
+    def _build_budget_request(name: str, limit: str, currency: str, wallets: list, categories: list, users: list,
+                              position: int = 1, start_date: datetime.date = None, end_date: datetime.date = None,
+                              status: str = 'active', all_categories_selected: bool = True, all_users_selected: bool = True,
+                              all_wallets_selected: bool = True, period: str = 'monthly', offline: bool = False,
+                              notification: bool = True):
+
+        if start_date is None:
+            start_date = datetime.datetime.today()
+        if end_date is None and period == 'once':
+            end_date = datetime.datetime.today() + datetime.timedelta(weeks=4)
+
+        request = {
+            "offline":  offline,
+            "name": name,
+            "limit": limit,
+            "currency": currency,
+            "wallets": wallets,
+            "categories": categories,
+            "users": users,
+            "period": period,
+            "start_date": start_date.strftime("%Y-%m-%d"),
+
+            "all_categories_selected": 1 if all_categories_selected else 0,
+            "all_users_selected": 1 if all_users_selected else 0,
+            "all_wallets_selected": 1 if all_wallets_selected else 0,
+
+            "status": status,
+            "notification": notification,
+            "position": position
+        }
+
+        if end_date:
+            request['end_date'] = end_date
+
+        return request
+
     def create_budget(self, name: str, limit: str, currency: str, wallets: list, categories: list, users: list,
                       position: int = 1, start_date: datetime.date = None, end_date: datetime.date = None,
                       status: str = 'active', all_categories_selected: bool = True, all_users_selected: bool = True,
@@ -865,35 +907,103 @@ class Spendee(Session):
                 "wallets":[999999]
             }]
         """
+        kwargs['json'] = self._build_budget_request(name, limit, currency, wallets, categories, users, position,
+                                                    start_date, end_date, status, all_categories_selected,
+                                                    all_users_selected, all_wallets_selected, period, offline,
+                                                    notification)
 
-        if start_date is None:
-            start_date = datetime.datetime.today()
-        if end_date is None and period == 'once':
-            end_date = datetime.datetime.today() + datetime.timedelta(weeks=4)
+        return self.post(url=url, version=version, **kwargs)
 
+    def edit_budget(self, name: str, limit: str, currency: str, wallets: list, categories: list, users: list,
+                      position: int = 1, start_date: datetime.date = None, end_date: datetime.date = None,
+                      status: str = 'active', all_categories_selected: bool = True, all_users_selected: bool = True,
+                      all_wallets_selected: bool = True, period: str = 'monthly', offline: bool = False,
+                      notification: bool = True, version: str = 'v1.7', url: str = 'edit-budget', **kwargs):
+        """
+        Edit a budget
+
+        :param name: name of the budget
+        :param limit: the budget amount
+        :param currency: amount's currency
+        :param wallets: list of wallets this budget is relevant to
+        :param categories: list of categories this budget is relevant to
+        :param users: list of users this budget is shared with
+        :param position: order position of the budget among all the budgets
+        :param start_date: when
+        :param end_date: when is the end of the budget. Only relevant when period='once'
+        :param status: active
+        :param period: once/daily/weekly/biweekly/monthly/yearly
+        :param offline: whether it was created offline
+        :param notification: whether to enable notifications for this budget
+        :param all_categories_selected: whether all categories were selected or only a subset of them
+        :param all_wallets_selected: whether all wallets were selected or only a subset of them
+        :param all_users_selected: whether all users were selected or only a subset of them
+        :return:
+        .. code-block:: json
+
+            {
+               "offline":false,
+               "name":"test",
+               "limit":100000,
+               "currency":"EUR",
+               "wallets":[
+                  3701346,
+                  3701650,
+                  3985011,
+                  3798485,
+                  4023988,
+                  3781423,
+                  3702897,
+                  3701651
+               ],
+               "categories":[
+                  34957623,
+                  84022999,
+                  83784771,
+                  86439902,
+                  83168392,
+                  34957999,
+                  85507860,
+                  34958019,
+                  88157983,
+                  34958005,
+                  89822749,
+                  84022998,
+                  89822608,
+                  83167932,
+                  86439208
+               ],
+               "users":[
+                  782471,
+                  1769631
+               ],
+               "period":"month",
+               "start_date":"2020-04-17",
+               "id":1134489,
+               "all_categories_selected":0,
+               "all_users_selected":1,
+               "all_wallets_selected":1,
+               "status":"active",
+               "notification":true,
+               "position":2
+            }
+        """
+
+        kwargs['json'] = self._build_budget_request(name, limit, currency, wallets, categories, users, position,
+                                                    start_date, end_date, status, all_categories_selected,
+                                                    all_users_selected, all_wallets_selected, period, offline,
+                                                    notification)
+
+        return self.post(url=url, version=version, **kwargs)
+
+    def delete_budget(self, budgets: list, version: str = 'v1.7', url: str = 'delete-budget', **kwargs):
+        """
+        Deletes a list of budgets
+        :param budgets: list of budgets to delete
+        """
         kwargs['json'] = {
-            "offline":  offline,
-            "name": name,
-            "limit": limit,
-            "currency": currency,
-            "wallets": wallets,
-            "categories": categories,
-            "users": users,
-            "period": period,
-            "start_date": start_date.strftime("%Y-%m-%d"),
-
-            "all_categories_selected": 1 if all_categories_selected else 0,
-            "all_users_selected": 1 if all_users_selected else 0,
-            "all_wallets_selected": 1 if all_wallets_selected else 0,
-
-            "status": status,
-            "notification": notification,
-            "position": position
+            "budgets": budgets
         }
-
-        if end_date:
-            kwargs['json']['end_date'] = end_date
-
         return self.post(url=url, version=version, **kwargs)
 
     ###
@@ -965,3 +1075,89 @@ class Spendee(Session):
             }]
         """
         return self.get(url=url, version=version, **kwargs)
+
+    def sync_refresh(self, login_id: int, wallet_id: int, version: str = 'v2', url: str = 'logins/refresh', **kwargs):
+        """
+        :param login_id: bank login id
+        :param login_id: wallet id
+        :param client_version: default parameter
+        :param client_platform: default parameter
+        :return:
+        .. code-block:: json
+            {
+                "url": "https:\/\/api2.spendee.com\/finish\/error?token=xxx"
+            }
+
+            or
+
+            {
+                "url": "https:\/\/api2.spendee.com\/wait?token=xxx"
+            }
+        """
+        kwargs['json'] = {
+            'loginId': login_id,
+            "oAuthReturnUrl": "https://app.spendee.com/wallet/{}/transactions/sync-account/oauth-return".format(wallet_id)
+        }
+        return self.put(url=url, version=version, **kwargs)
+
+    def providers(self, country: str, version: str = 'v2', url: str = 'providers', **kwargs):
+        """
+        Retrieves a list of all available providers of bank accounts in a country
+
+        :param country: 2 letter country code
+        :rtype: list
+        :return:
+        .. code-block:: json
+
+        [
+              {
+                 "name":"Demo Bank",
+                 "countryCode":"AF",
+                 "providerCode":"demobank_xo",
+                 "isFree":true,
+                 "is_free":true,
+                 "picture":"https:\/\/api2.spendee.com\/media\/cache\/provider_logo_original\/demobank_xo.jpeg",
+                 "thumb_24":"https:\/\/api2.spendee.com\/media\/cache\/provider_logo_thumb_24\/demobank_xo.jpeg"
+              }
+        ]
+        """
+        kwargs['params'] = {
+            'country': country
+        }
+        return self.get(url=url, version=version, **kwargs)
+
+    def connect_bank_account(self, provider_code: str, server_account_picker: bool = False,
+                             oauth_return_url: str = "https://app.spendee.com/dashboard/connect-bank/oauth-return",
+                             version: str = 'v2', url: str = 'url', **kwargs):
+        """
+        Creates a wallet that auto syncs from your bank account
+
+        :param provider_code: providerCode returned for a bank from `self.providers`
+        :param server_account_picker: default parameter
+        :param oauth_return_url: default parameter
+        :rtype: list
+        :return:
+        .. code-block:: json
+            {
+               "url":"https:\/\/api2.spendee.com\/form\/connector:salt-edge:login-form?token=xxx"
+            }
+        """
+        kwargs['json'] = {
+            "provider_code": provider_code,
+            "oauth_return_url": oauth_return_url,
+            "server_account_picker": server_account_picker
+        }
+        return self.post(url=url, version=version, **kwargs)
+
+    def choose_bank_account(self, accounts: list, version: str = 'v2', url: str = 'visible', **kwargs):
+        """
+        After connecting a bank account, some banks have sub-accounts (for different currencies, savings, checking etc.)
+
+        :param accounts: list of chosen account IDs
+        :rtype: bool
+        :return: true
+        """
+        kwargs['json'] = {
+            "accounts": [{'id': account, 'isVisible': True} for account in accounts]
+        }
+        return self.put(url=url, version=version, **kwargs)
