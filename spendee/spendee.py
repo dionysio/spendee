@@ -1,6 +1,7 @@
 from uuid import uuid4
 import datetime
 
+import requests
 from requests import Session
 from requests.exceptions import RequestException
 
@@ -8,7 +9,7 @@ from .exceptions import SpendeeError
 
 
 class Spendee(Session):
-    def __init__(self, email: str, password: str, base_url: str = 'https://api.spendee.com/'):
+    def __init__(self, email: str, password: str, base_url: str = 'https://api.spendee.com/', google_client_id: str = 'AIzaSyCCJPDxVNVFEARQ-LxH7q2aZtdQJGGFO84'):
         """
         :param email: user email to use for login
         :param password: user password to use for login
@@ -17,8 +18,10 @@ class Spendee(Session):
         self.base_url = base_url
         self._email = email
         self._password = password
+        self._google_client_id = google_client_id
 
-        self._api_uuid = None
+        self._access_token = None
+        self._device_uuid = None
         super(Spendee, self).__init__()
 
     def _build_url(self, version: str, url: str):
@@ -30,7 +33,10 @@ class Spendee(Session):
         :rtype: str
         :return: full Spendee URL
         """
-        return '{}{}/{}'.format(self.base_url, version, url)
+        if url.startswith('http'):
+            return url
+        else:
+            return '{}{}/{}'.format(self.base_url, version, url)
 
     def request(self, method, url, version: str = 'v1', headers=None, params=None, **kwargs):
         """
@@ -64,10 +70,18 @@ class Spendee(Session):
                 'clientPlatform': 'WEB'
             }
         if headers is None:
-            headers = {}
+            headers = {
+                'Spendee-Platform': 'web',
+                'Spendee-Version': 'master'
+            }
 
-        if url not in ('user-login', 'user-registration'):
-            headers['api-uuid'] = self._get_api_uuid()
+        if not self._access_token and not any(i in url for i in ('user-registration', 'googleapis')):
+            self.user_login()
+
+        if self._access_token:
+            headers['Authorization'] = 'Bearer {}'.format(self._access_token)
+        if self._device_uuid:
+            headers['Device-Uuid'] = self._device_uuid
 
         url = self._build_url(version, url)
 
@@ -83,26 +97,16 @@ class Spendee(Session):
         except ValueError as e:
             raise SpendeeError("Response can't be serialized", response=response) from e
 
-        if result.get('status') != 'SUCCESS':
+        if 'status' in result and result['status'] != 'SUCCESS':
             message = result.get('error', {}).get('message', 'Unexpected error on the Spendee side')
             raise SpendeeError(message, response=response)
 
-        return result['result']
+        if 'result' in result:
+            return result['result']
+        else:
+            return result
 
     ###
-
-    def _get_api_uuid(self, **kwargs):
-        """
-        Retrieves api_uuid which is an auth token provided by self.user_login method and it's then sent in an api-uuid
-        header in order to use authorized methods
-
-        :return: UUID like "5808b3d4-9999-9999-8466-aad7f20b3252"
-        :rtype: str
-        """
-        if not self._api_uuid:
-            login = self.user_login(**kwargs)
-            self._api_uuid = login['api_uuid']
-        return self._api_uuid
 
     def user_registration(self, email: str = None, password: str = None, device_uuid: str = None,
                           categories_version: int = 2, with_categories: bool = True,  version: str = 'v1.5',
@@ -170,7 +174,26 @@ class Spendee(Session):
 
         return super(Spendee, self).post(url=url, version=version, **kwargs)
 
-    def user_login(self, device_uuid: str = None, **kwargs):
+    def _get_refresh_token(self, email: str = None, password: str = None, **kwargs):
+        kwargs['json'] = {
+            'email': email,
+            'password': password,
+            'returnSecureToken': True,
+        }
+        url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={}'.format(self._google_client_id)
+        response = super(Spendee, self).post(url=url, **kwargs)
+        return response['refreshToken']
+
+    def _get_access_token(self, refresh_token: str, **kwargs):
+        kwargs['json'] = {
+            'refresh_token': refresh_token,
+            'grant_type': 'refresh_token',
+        }
+        url = 'https://securetoken.googleapis.com/v1/token?key={}'.format(self._google_client_id)
+        response = super(Spendee, self).post(url=url, **kwargs)
+        return response['access_token']
+
+    def user_login(self, version: str = 'v3', url: str = 'auth/login', **kwargs):
         """
         Method to authenticate the user
 
@@ -178,69 +201,18 @@ class Spendee(Session):
         :rtype: dict
         :return: the same as underlying self._user_login method
         """
-        if device_uuid is None:
-            device_uuid = str(uuid4())
-        return self._user_login(email=self._email, password=self._password, device_uuid=device_uuid, **kwargs)
-
-    def _user_login(self, email: str = None, password: str = None, device_uuid: str = None, version: str = 'v1.4',
-                    url: str = 'user-login', **kwargs):
-        """
-        Method to authenticate the user
-
-        :param email: user email
-        :param password: user password
-        :param device_uuid: random string with 36 characters
-        :rtype: dict
-        :return:
-        .. code-block:: json
-
-            {
-                "id": 999999,
-                "uuid": "b9b6ecb3-9999-9999-bf15-03fb802f4628",
-                "email": "fry@planetexpress.com",
-                "firstname": "Phillip J.",
-                "lastname": "Fry",
-                "nickname": "Fry",
-                "timezone_id": "Europe/Prague",
-                "gender": "male",
-                "birth_date": "1974-08-14",
-                "gp_uid": 107416106303948470000,b9
-                "fb_uid": 107416104303448470000,
-                "photo": "https://api.spendee.com/files/b/3/916307877cb8e1af749c70ed16271705",
-                "cohort_date": "2017-10-19 18:03:59",
-                "categories_version": 2,
-                "referral_code": "53t71r",
-                "push_allowed": 1,
-                "past_type": "free",
-                "type": "premium",
-                "unconfirmed_email": null,
-                "premium_expiration": "2020-01-02",
-                "conditions_accepted": "2017-10-19 20:07:14",
-                "global_currency": "EUR",
-                "last_recommendation_likelihood_date": "2019-12-16 04:08:51.750837",
-                "agreement_general_tos": "2019-11-24 22:54:56",
-                "agreement_marketing": "2019-11-24 22:54:57",
-                "viewed_tos_agreement_dialog": true,
-                "viewed_dialogs":{
-                    "black_friday_intro_2019": true,
-                    "transfers_how_it_works": true,
-                    "transfers_feature_introduction": true
-                },
-                "has_already_tried_out_trial": true,
-                "count_referred_users": 0,
-                "is_registered_via_referral_code": false,
-                "api_uuid": "5808b3d4-9999-9999-8466-aad7f20b3252",
-                "transactions_count": 7,
-                "premium_operator": null
-            }
-        """
+        refresh_token = self._get_refresh_token(self._email, self._password)
+        self._access_token = self._get_access_token(refresh_token)
         kwargs['json'] = {
-            'email': email,
-            'password': password,
-            'device_uuid': device_uuid
+            "global_currency": "USD",
+            "default_wallet_name": "Cash Wallet",
+            "timezone": 'Asia/Jakarta',
+            "platform": "web",
+            "version": "master",
+            "credential": None
         }
-
-        return super(Spendee, self).post(url=url, version=version, **kwargs)
+        result = super(Spendee, self).post(url=url, version=version, **kwargs)
+        self._device_uuid = result['device_uuid']
 
     def user_logout(self, version: str = 'v1.4', url: str = 'user-logout', **kwargs):
         """
@@ -1161,3 +1133,101 @@ class Spendee(Session):
             "accounts": [{'id': account, 'isVisible': True} for account in accounts]
         }
         return self.put(url=url, version=version, **kwargs)
+
+    def create_transfer(self, source_wallet_id: int, destination_wallet_id: int, user_id: int,
+                        amount: float, currency: str, repeat: str = 'never', reminder: str = 'never', note: str = None,
+                        hashtags: str = None, start_date: datetime = None, additional_exchange_rate_info: list = None,
+                        version: str = 'v1.5', url: str = 'transfer-funds', **kwargs):
+        """
+            {
+              "source_wallet_id": 4201415,
+              "destination_wallet_id": 4201414,
+              "user_id": 782471,
+              "start_date": "2020-07-12 13:31:39",
+              "amount": "10",
+              "currency": "USD",
+              "repeat": "never",
+              "reminder": "never",
+              "note": null,
+              "hashtags": null,
+              "additional_exchange_rate_info": [
+                {
+                  "from_currency": "USD",
+                  "to_currency": "EUR",
+                  "exchange_rate": "0.884955999999991"
+                },
+                {
+                  "from_currency": "EUR",
+                  "to_currency": "USD",
+                  "exchange_rate": 1.1299996836001
+                }
+              ],
+              "offset": "+07:00",
+              "timezone": "Asia/Jakarta"
+            }
+        :return:
+        """
+        if additional_exchange_rate_info is None:
+            additional_exchange_rate_info = []
+
+        if start_date is None:
+            start_date = datetime.datetime.now()
+
+        kwargs['json'] = {
+            "source_wallet_id": source_wallet_id,
+            "destination_wallet_id": destination_wallet_id,
+            "user_id": user_id,
+            "start_date": start_date.strftime('%Y-%m-%d %H:%M:%S'),
+            "amount": amount,
+            "currency": currency,
+            "repeat": repeat,
+            "reminder": reminder,
+            "note": note,
+            "hashtags": hashtags,
+            "additional_exchange_rate_info": additional_exchange_rate_info
+        }
+        return self.post(url=url, version=version, **kwargs)
+
+    def create_transaction(self, wallet_id: int, category_id: int, amount: float, repeat: str = 'never',
+                           reminder: str = 'never', note: str = None, start_date: datetime = None,
+                           foreign_currency: str = None, foreign_amount: str = None, foreign_rate: float = 1,
+                           version: str = 'v1.5', url: str = 'wallet-create-transaction', **kwargs):
+        '''
+        {
+           "wallet_id":4201617,
+           "category_id":34957999,
+           "hashtags":{
+
+           },
+           "repeat":"never",
+           "reminder":"never",
+           "start_date":"2020-07-24 09:01:36",
+           "current_wallet":4201617,
+           "amount":-1,
+           "foreign_currency":null,
+           "foreign_amount":null,
+           "foreign_rate":1,
+           "offset":"+07:00",
+           "timezone":"Asia/Jakarta"
+        }
+        :return:
+        '''
+
+        if start_date is None:
+            start_date = datetime.datetime.now()
+
+        kwargs['json'] = {
+           "wallet_id": wallet_id,
+           "category_id": category_id,
+           "hashtags": {},
+           "note": note,
+           "repeat": repeat,
+           "reminder": reminder,
+           "start_date": start_date.strftime('%Y-%m-%d %H:%M:%S'),
+           "current_wallet": wallet_id,
+           "amount": amount,
+           "foreign_currency": foreign_currency,
+           "foreign_amount": foreign_amount,
+           "foreign_rate": foreign_rate
+        }
+        return self.post(url=url, version=version, **kwargs)
