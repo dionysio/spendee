@@ -5,14 +5,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="spendee",
-    version="0.9.9",
+    version="1.0",
     author="Dionyz Lazar",
     author_email="dio@dionysio.com",
     description="Wrapper for the Spendee API",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dionysio/spendee",
-    download_url="https://github.com/dionysio/spendee/archive/v0.9.9.9.tar.gz",
+    download_url="https://github.com/dionysio/spendee/archive/v0.1.0.tar.gz",
     packages=setuptools.find_packages(),
     install_requires=['requests'],
     classifiers=[
